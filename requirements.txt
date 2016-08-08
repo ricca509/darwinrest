@@ -1,7 +1,7 @@
-flask 
-flask_restful 
-nre-darwin-py 
-lxml 
-cssselect 
+flask
+flask_restful
+nre-darwin-py
+lxml
+cssselect
 beautifulsoup4
 gunicorn
