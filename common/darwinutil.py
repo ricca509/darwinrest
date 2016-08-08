@@ -102,7 +102,7 @@ def get_service_details(api_key, service_id, all_fields=False):
 
     if all_fields:
         service_response["disruptionReason"] = service_details.disruption_reason
-        service_response["generatedAt"] = str(service_details.generated_at)
+        service_response["generatedAt"] = str(service_details.generated_at) if hasattr(service_details, 'generated_at') else None
         service_response["actualArrivalTime"] = service_details.ata
         service_response["actualDepartureTime"] = service_details.atd
         service_response["estimatedArrivalTime"] = service_details.eta
