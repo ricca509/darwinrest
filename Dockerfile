@@ -6,9 +6,7 @@ RUN apk add --update \
     python-dev \
     py-pip \
     curl ca-certificates \
-    build-base \
-    libxml2-dev libxml2 libxslt libxslt-dev \
-  && update-ca-certificates \
+    libxml2-dev libxslt-dev py-lxml \
   && rm -rf /var/cache/apk/*
 
 ADD . /app
