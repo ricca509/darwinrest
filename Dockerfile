@@ -1,10 +1,30 @@
-FROM python:2-onbuild
+#Grab the latest alpine image
+FROM alpine:3.4
+
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    curl ca-certificates \
+    build-base \
+    libxml2-dev libxml2 libxslt libxslt-dev \
+  && update-ca-certificates \
+  && rm -rf /var/cache/apk/*
+
 ADD . /app
 WORKDIR /app
-ENV FLASK_APP=app.py
-ENV PYTHONPATH=/app
-EXPOSE 5000
+
 RUN pip install -r requirements.txt
+
+# Expose is NOT supported by Heroku
+EXPOSE 5000
+
+# Run the image as a non-root user
+RUN adduser -D myuser
+USER myuser
+
+# Run the app. CMD is required to run on Heroku
+# $PORT is set by Heroku
 CMD gunicorn --bind 0.0.0.0:$PORT wsgi
 
-# docker run -p 5000:5000 -e PORT=5000 darwinrest
+# docker run --rm -ti -p 5000:5000 -e PORT=5000 darwinrest
