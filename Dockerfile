@@ -5,7 +5,7 @@ RUN apk add --update \
     python \
     python-dev \
     py-pip \
-    curl ca-certificates \
+    ca-certificates \
     libxml2-dev libxslt-dev py-lxml \
   && rm -rf /var/cache/apk/*
 
@@ -25,4 +25,5 @@ USER myuser
 # $PORT is set by Heroku
 CMD gunicorn --bind 0.0.0.0:$PORT wsgi
 
+# docker build -t darwinrest .
 # docker run --rm -ti -p 5000:5000 -e PORT=5000 darwinrest
